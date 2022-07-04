@@ -32,16 +32,12 @@ export default class Album extends Component {
             </>
           ) }
           {musics.length > 0
-          && musics.filter(({ kind }) => kind === 'song').map((element) => {
-            if (element.wrapperType === 'collection') {
-              return null;
-            }
-            return (<MusicCard
-              key={ element.trackId }
-              previewUrl={ element.previewUrl }
-              trackName={ element.trackName }
-            />);
-          })}
+          && musics.filter(({ kind }) => kind === 'song').map((element) => (<MusicCard
+            key={ element.trackId }
+            previewUrl={ element.previewUrl }
+            trackName={ element.trackName }
+            trackId={ element.trackId }
+          />))}
         </div>
       </div>
     );
