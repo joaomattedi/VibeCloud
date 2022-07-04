@@ -9,29 +9,30 @@ export default class MusicCard extends Component {
 
     this.state = {
       loading: false,
-      checked: false,
     };
   }
 
   onHandleChange = (event) => {
     const { checked } = event.target;
-    const { trackId } = this.props;
+    const { trackId, previewUrl, trackName, updateFavorites } = this.props;
     if (checked) {
-      this.setState({ loading: true, checked: true }, async () => {
-        await addSong(trackId);
+      this.setState({ loading: true }, async () => {
+        await addSong({ trackId, trackName, previewUrl });
+        await updateFavorites();
         this.setState({ loading: false });
       });
     } else {
-      this.setState({ loading: true, checked: false }, async () => {
-        await removeSong(trackId);
+      this.setState({ loading: true }, async () => {
+        await removeSong({ trackId, trackName, previewUrl });
+        await updateFavorites();
         this.setState({ loading: false });
       });
     }
   }
 
   render() {
-    const { trackName, previewUrl, trackId } = this.props;
-    const { loading, checked } = this.state;
+    const { trackName, previewUrl, trackId, favorite } = this.props;
+    const { loading } = this.state;
     if (loading) return <Loading />;
     return (
       <div>
@@ -47,7 +48,7 @@ export default class MusicCard extends Component {
             name="favorite"
             id="favorite"
             onChange={ this.onHandleChange }
-            checked={ checked }
+            checked={ favorite }
           />
         </label>
       </div>
@@ -56,7 +57,9 @@ export default class MusicCard extends Component {
 }
 
 MusicCard.propTypes = {
+  favorite: PropTypes.bool.isRequired,
   previewUrl: PropTypes.string.isRequired,
   trackId: PropTypes.number.isRequired,
   trackName: PropTypes.string.isRequired,
+  updateFavorites: PropTypes.func.isRequired,
 };
