@@ -15,15 +15,24 @@ export default class Favorites extends Component {
   }
 
   componentDidMount() {
+    this.isMount = true;
     this.setState({ loading: true }, async () => {
-      const musics = await getFavoriteSongs();
-      this.setState({ musicsFav: musics, loading: false });
+      if (this.isMount) {
+        const musics = await getFavoriteSongs();
+        this.setState({ musicsFav: musics, loading: false });
+      }
     });
   }
 
+  componentWillUnmount() {
+    this.isMount = false;
+  }
+
   updateFavorites = async () => {
-    const favorites = await getFavoriteSongs();
-    this.setState({ musicsFav: favorites });
+    if (this.isMount) {
+      const favorites = await getFavoriteSongs();
+      this.setState({ musicsFav: favorites });
+    }
   }
 
   render() {

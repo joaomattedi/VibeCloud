@@ -14,8 +14,15 @@ export default class Header extends Component {
   }
 
   componentDidMount = async () => {
+    this.isMount = true;
     const userFound = await getUser();
-    this.setState(() => ({ logged: true, user: userFound }));
+    if (this.isMount) {
+      this.setState(() => ({ logged: true, user: userFound }));
+    }
+  }
+
+  componentWillUnmount() {
+    this.isMount = false;
   }
 
   render() {
