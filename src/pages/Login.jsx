@@ -3,6 +3,7 @@ import './Login.css';
 import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import Loading from '../components/Loading';
+import iconeAzul from '../icons/iconeAzul.png';
 
 export default class Login extends Component {
   constructor() {
@@ -54,15 +55,22 @@ export default class Login extends Component {
     if (loading) return <Loading />;
     return (
       <div data-testid="page-login" className="loginContainer">
-        <img src="./icons/iconeAzul.png" alt="Icone TrybeTunes" />
+        <img
+          src={ iconeAzul }
+          alt="Ícone TrybeTunes"
+          className="logoImage"
+        />
         <input
           type="text"
+          placeholder="Username"
           data-testid="login-name-input"
           onChange={ this.loginChecker }
+          className="inputLogin"
         />
         <button
           data-testid="login-submit-button"
           type="button"
+          className="loginButton"
           onClick={ this.loggingIn }
           disabled={ invalidLogin }
         >

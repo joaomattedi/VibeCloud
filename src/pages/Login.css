@@ -1,9 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap') ;
+
 .loginContainer {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: calc(100vh - 30px);
   justify-content: center;
   margin: auto;
   padding: 5px;
   width: 300px;
+}
+
+.logoImage {
+  padding-bottom: 30px;
+  width: 40%;
+}
+
+.inputLogin {
+  border: 0;
+  border-bottom: 2px solid rgba(43, 212, 224, 0.5);
+  font-family: Montserrat , sans-serif;
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.inputLogin::placeholder {
+  opacity: 0.5;
+}
+
+.inputLogin:focus {
+  border-bottom: 2px solid rgb(43, 212, 224);
+  outline: none;
+
+}
+
+.loginButton {
+  background-color: rgba(43, 212, 224, 0.5);
+  border: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px #999;
+  font-family: Montserrat , sans-serif;
+  padding: 10px 20px;
+}
+
+.loginButton:enabled {
+  background-color: rgb(43, 212, 224);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px #999;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+.loginButton:active {
+  background-color: rgba(43, 212, 224, 0.5);
+  box-shadow: 0 1px #666;
+  transform: translateY(4px);
 }
